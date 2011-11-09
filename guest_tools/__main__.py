@@ -22,7 +22,6 @@ def disk_io_counters(perdisk = False):
             stats[k] = iostat_to_dict(v)
     else:
         stats = iostat_to_dict(stats)
-    print stats
     return stats
 
 import xmlrpclib
