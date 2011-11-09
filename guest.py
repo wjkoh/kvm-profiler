@@ -1,10 +1,12 @@
 from lxml import etree
+import measures.llc
 
 class Guest:
     def __init__(self, domain, pid):
         self.domain = domain
         self.pid = pid
         self.desc = None
+        self.llc_data = measures.llc.LLC_Data()
 
     def get_domain(self):
         return self.domain
