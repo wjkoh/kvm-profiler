@@ -1,3 +1,5 @@
+LISTEN_PORT = 8000
+
 try:
     import psutil
 except ImportError, e:
@@ -27,7 +29,7 @@ import xmlrpclib
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
 if __name__ == '__main__':
-    server = SimpleXMLRPCServer(("localhost", 8000))
-    print 'Listening on port 8000...'
+    server = SimpleXMLRPCServer(('', LISTEN_PORT))
+    print 'Listening on port %d...' % LISTEN_PORT
     server.register_function(disk_io_counters, 'disk_io_counters')
     server.serve_forever()
