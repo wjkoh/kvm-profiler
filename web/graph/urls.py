@@ -8,7 +8,9 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'web.views.home', name='home'),
     # url(r'^web/', include('web.foo.urls')),
-    url(r'graph', 'graph.views.image'),
+    url(r'^graph.png$', 'graph.views.image'),
+    url(r'^measures$', 'graph.views.measures'),
+    url(r'^guests$', 'graph.views.guests'),
     url(r'', 'graph.views.index'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
