@@ -35,15 +35,14 @@ if __name__ == "__main__":
     drawer = draw.Drawer()
     oprofile = oprofile_wrapper.OProfile()
 
-    for x in range(1*60):
-        timestamp = int(time.mktime(datetime.datetime.now().timetuple()))
+    while True:
         oprofile.refresh()
 
-    while True:
         for guest in guests:
             guest_name = guest.get_name()
             now = datetime.datetime.now()
 
+            stats = {}
             stats['DISK'] = measures.disk.get(guest)
             stats['DISK_GUEST'] = measures.disk_guest.get(guest)
             stats['NETWORK'] = measures.network.get(guest)
