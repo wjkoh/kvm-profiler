@@ -4,8 +4,9 @@ KVM Profiler is a profiler for [Kernel-based Virtual Machine (KVM)](http://www.l
 # Usage
     $ python .
     Profiling and writing to database
+
     $ web/manage.py runserver 0.0.0.0:3000
-    Serving web frontend UI
+    Serving Web front-end UI
 
 You need to ensure that your username is added to the groups: kvm and libvirtd.
 
@@ -21,6 +22,9 @@ You need to ensure that your username is added to the groups: kvm and libvirtd.
 1. [numpy](http://numpy.scipy.org/)
 1. [matplotlib](http://matplotlib.sourceforge.net/)
 1. [django](http://www.djangoproject.com/)
+
+## Guest tools
+1. [psutil](http://pypi.python.org/pypi/psutil)
 
 # Authors
 * Charles Hyun <tokki7@gmail.com>
