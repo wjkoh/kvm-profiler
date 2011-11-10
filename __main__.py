@@ -8,6 +8,8 @@ import measures.disk
 import measures.disk_guest
 import measures.network
 import measures.cpu_mem
+import measures.llc
+import measures.ipc
 
 from django.core.management import setup_environ
 from web import settings
@@ -46,6 +48,7 @@ if __name__ == "__main__":
             stats['DISK_GUEST'] = measures.disk_guest.get(guest)
             stats['NETWORK'] = measures.network.get(guest)
             stats['LLC'] = measures.llc.get(guest)
+            stats['IPC'] = measures.ipc.get(guest)
 
             putMeasurements(guest_name, now, stats, '')
 
