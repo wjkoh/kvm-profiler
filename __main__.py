@@ -1,7 +1,6 @@
 import time
 import datetime
 
-import arp
 import draw
 import libvirt_wrapper
 import oprofile_wrapper

@@ -2,7 +2,6 @@ import libvirt
 import psutil
 
 import guest
-import arp
 
 class Connection:
     def __init__(self):
@@ -37,4 +36,4 @@ if __name__ == "__main__":
     conn = Connection()
     guests = conn.get_guests()
     for guest in guests:
-        print guest.get_name(), ":", guest.get_pid(), ":", guest.get_mac(), ":", arp.mac_to_ip(guest.get_mac())
+        print guest.get_name(), ":", guest.get_pid(), ":", guest.get_mac(), ":", guest.get_ip()
