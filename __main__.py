@@ -1,7 +1,7 @@
 import time
 import datetime
 
-import draw
+#import draw
 import libvirt_wrapper
 import oprofile_wrapper
 import measures.disk
@@ -31,7 +31,7 @@ def putMeasurements(guest, now, stats, prefix):
 if __name__ == "__main__":
     conn = libvirt_wrapper.Connection()
     guests = conn.get_guests()
-    drawer = draw.Drawer()
+    #drawer = draw.Drawer()
     oprofile = oprofile_wrapper.OProfile()
 
     while True:
