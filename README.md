@@ -3,6 +3,9 @@ KVM Profiler is a profiler for [Kernel-based Virtual Machine (KVM)](http://www.l
 
 # Usage
     $ python .
+    Profiling and writing to database
+    $ web/manage.py runserver 0.0.0.0:3000
+    Serving web frontend UI
 
 You need to ensure that your username is added to the groups: kvm and libvirtd.
 
@@ -13,13 +16,14 @@ You need to ensure that your username is added to the groups: kvm and libvirtd.
 
 # Dependencies
 1. [python-libvirt](http://packages.ubuntu.com/search?keywords=python-libvirt)
-1. [LXML](http://pypi.python.org/pypi/lxml)
-1. [PSUtil](http://pypi.python.org/pypi/psutil)
-1. [RRDtool](http://oss.oetiker.ch/rrdtool/)
-1. [PyRRD](http://pypi.python.org/pypi/PyRRD)
-1. [SQLAlchemy](http://www.sqlalchemy.org/)
+1. [lxml](http://pypi.python.org/pypi/lxml)
+1. [psutil](http://pypi.python.org/pypi/psutil)
+1. [numpy](http://numpy.scipy.org/)
+1. [matplotlib](http://matplotlib.sourceforge.net/)
+1. [django](http://www.djangoproject.com/)
 
 # Authors
 * Charles Hyun <tokki7@gmail.com>
 * Jeehoon Kang <windmorning@gmail.com>
 * Woojong Koh  <wjngkoh@gmail.com>
+

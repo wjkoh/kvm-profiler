@@ -3,15 +3,17 @@ $(function() {
           {
               tagName: 'div',
 
-              initialize: function(options) {
+              initialize: function() {
                   this.el = $(this.el);
+                  this.el.append($('<div style="display: none"></div>'));
                   this.src = '';
               },
 
               render: function()
               {
-                  this.el.children().remove();
-                  this.el.append($('<img src="' + this.src + '" />'));
+                  this.el.find('> img').remove();
+                  this.el.append(this.el.find('div img').detach());
+                  this.el.find('div').append($('<img src="' + this.src + '" />'));
                   return this;
               },
 
@@ -29,9 +31,14 @@ $(function() {
 
               template: _.template('<input type="checkbox" name="guest" value="<%= name %>" /><%= name %><br />'),
 
-              initialize: function(options) {
+              initialize: function() {
                   this.el = $(this.el);
-                  this.guests = options.guests;
+                  this.guests = [];
+              },
+
+              setGuests: function(guests) {
+                  this.guests = guests;
+                  this.render();
               },
 
               render: function() {
@@ -66,9 +73,14 @@ $(function() {
 
               template: _.template('<input type="radio" name="measure" value="<%= name %>" /><%= name %><br />'),
 
-              initialize: function(options) {
+              initialize: function() {
                   this.el = $(this.el);
-                  this.measures = options.measures;
+                  this.measures = [];
+              },
+
+              setMeasures: function(measures) {
+                  this.measures = measures;
+                  this.render();
               },
 
               render: function() {
@@ -92,26 +104,29 @@ $(function() {
           });
 
       var imageView = new window.ImageView();
-
-      var guestView = new window.GuestView(
-          {
-              // TODO: we should update the guest list.
-              guests: ['guest-0', 'guest-1'] 
-          });
-      var measureView = new window.MeasureView(
-          {
-              // TODO: we should update the measure list.
-              measures: ['measure-0', 'measure-1'] 
-          });
+      var guestView = new window.GuestView();
+      var measureView = new window.MeasureView();
 
       $(document.body).append(guestView.render().el);
       $(document.body).append(measureView.render().el);
       $(document.body).append(imageView.render().el);
 
+      $.get('/graph/guests', function(guests)
+            {
+                guestView.setGuests(guests);
+            });
+      $.get('/graph/measures', function(measures)
+            {
+                measureView.setMeasures(measures);
+            });
+
+      var count = 0;
       var refresh = function()
       {
-          // TODO: we should update the src.
-          imageView.setSrc('/graph/graph.png');
+          var guests = guestView.getValues();
+          var measure = measureView.getValue();
+          measure = measure ? measure : '';
+          imageView.setSrc('/graph/graph.png?count=' + (++count) + '&guests=' + guests + '&measure=' + measure);
       };
 
       setInterval(refresh, 1000);

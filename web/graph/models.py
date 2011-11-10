@@ -1,7 +1,7 @@
 from django.db import models
 
-class Data(models.Model):
+class Measurement(models.Model):
     time = models.DateTimeField()
-    guest = models.CharField(max_length=32)
-    measure = models.CharField(max_length=32)
-    value = models.IntegerField()
+    guest = models.CharField(max_length=256)
+    measure = models.CharField(max_length=256)
+    value = models.BigIntegerField()
