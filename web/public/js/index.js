@@ -126,7 +126,7 @@ $(function() {
           var guests = guestView.getValues();
           var measure = measureView.getValue();
           measure = measure ? measure : '';
-          imageView.setSrc('/graph/graph.png?count=' + (++count) + '&guests=' + guests + '&measure=' + measure);
+          imageView.setSrc('/graph/graph.png?count=' + (++count) + '&duration=100&guests=' + guests + '&measure=' + measure);
       };
 
       setInterval(refresh, 1000);

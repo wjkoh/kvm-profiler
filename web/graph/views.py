@@ -2,10 +2,10 @@ import os
 import sys
 sys.path.append(sys.path[0] + '/..')
 
-import datetime
 import numpy
 import matplotlib.pyplot as pyplot
 import json
+import datetime
 
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
@@ -24,16 +24,25 @@ def image(request):
     if guests == ['']:
         guests = []
     measure = request.GET.get('measure', None)
+    duration = int(request.GET.get('duration', 100))
 
     pyplot.clf()
     for guest in guests:
         times = []
         values = []
-        # TODO: duration
+
         measurements = Measurement.objects.filter(guest=guest, measure=measure)
+        maxTime = datetime.datetime(1900, 1, 1)
         for measurement in measurements:
-            times.append(measurement.time)
-            values.append(measurement.value)
+            if maxTime < measurement.time:
+                maxTime = measurement.time
+
+        minTime = maxTime - datetime.timedelta(seconds=duration)
+        
+        for measurement in measurements:
+            if minTime <= measurement.time:
+                times.append(measurement.time)
+                values.append(measurement.value)
         pyplot.plot(times, values, 'o-', label=guest)
 
     pyplot.xlabel('time')
