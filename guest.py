@@ -1,4 +1,5 @@
 from lxml import etree
+import arp
 import measures.llc
 
 class Guest:
@@ -19,6 +20,9 @@ class Guest:
 
     def get_mac(self):
         return self.get_xml_desc().find("devices/interface[@type='network']/mac").attrib["address"].lower().strip()
+
+    def get_ip(self):
+        return arp.mac_to_ip(self.get_mac())
 
     def get_target_devices(self, device_name):
         result = []

@@ -6,6 +6,7 @@ import draw
 import libvirt_wrapper
 import oprofile_wrapper
 import measures.disk
+import measures.disk_guest
 import measures.network
 import measures.cpu_mem
 
@@ -23,6 +24,7 @@ if __name__ == "__main__":
             stats = {'NAME': guest.get_name(), 'TIME': timestamp}
             stats['CPU_MEM'] = measures.cpu_mem.get(guest)
             stats['DISK'] = measures.disk.get(guest)
+            stats['DISK_GUEST'] = measures.disk_guest.get(guest)
             stats['NETWORK'] = measures.network.get(guest)
             stats['LLC'] = measures.llc.get(guest)
 
