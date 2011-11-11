@@ -44,6 +44,7 @@ if __name__ == "__main__":
             now = datetime.datetime.now()
 
             stats = {}
+            stats['CPU_MEM'] = measures.cpu_mem.get(guest)
             stats['DISK'] = measures.disk.get(guest)
             stats['DISK_GUEST'] = measures.disk_guest.get(guest)
             stats['NETWORK'] = measures.network.get(guest)
