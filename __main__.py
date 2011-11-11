@@ -49,7 +49,8 @@ if __name__ == "__main__":
             stats['NETWORK'] = measures.network.get(guest)
             stats['LLC'] = measures.llc.get(guest)
             stats['IPC'] = measures.ipc.get(guest)
-
+            
             putMeasurements(guest_name, now, stats, '')
 
         time.sleep(1)
+        oprofile.flush()

@@ -18,6 +18,9 @@ class OProfile:
 
     def refresh(self):
         os.system("opcontrol --dump")
+    
+    def flush(self):
+        os.system("opcontrol --reset")
 
 class OP_Data:
     def __init__(self):
@@ -26,10 +29,11 @@ class OP_Data:
         self.inst_retired = 0
         self.cpu_clk_unhalted = 0
 
-def get_measure(guest, mes_name, old_data):
+def get_measure(guest, mes_name):
     args = ["opreport", "-l", "event:"+mes_name, "tid:"+str(guest.get_pid()), "--merge=cpu", "-X"]
 
     p = subprocess.Popen( args, stdout = subprocess.PIPE, stderr = open( "/dev/null" ) )
+
     p.wait()
     data = ""
 
@@ -40,7 +44,8 @@ def get_measure(guest, mes_name, old_data):
         desc = etree.fromstring( data )
         return int( desc.find("process/count").text )
     except etree.XMLSyntaxError, e:
-        return old_data
+        print data
+        return 0
 
 if __name__ == "__main__":
     oprofile = OProfile()
