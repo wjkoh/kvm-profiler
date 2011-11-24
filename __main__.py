@@ -1,15 +1,11 @@
 import time
 import datetime
 
-#import draw
 import libvirt_wrapper
 import perf_wrapper
 import measures.disk
 import measures.disk_guest
 import measures.network
-import measures.cpu_mem
-import measures.llc
-import measures.ipc
 
 from django.core.management import setup_environ
 from web import settings
