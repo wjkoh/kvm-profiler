@@ -3,7 +3,7 @@ import datetime
 
 #import draw
 import libvirt_wrapper
-import oprofile_wrapper
+import perf_wrapper
 import measures.disk
 import measures.disk_guest
 import measures.network
@@ -33,11 +33,8 @@ def putMeasurements(guest, now, stats, prefix):
 if __name__ == "__main__":
     conn = libvirt_wrapper.Connection()
     guests = conn.get_guests()
-    #drawer = draw.Drawer()
-    oprofile = oprofile_wrapper.OProfile()
 
     while True:
-        oprofile.refresh()
 
         for guest in guests:
             guest_name = guest.get_name()
@@ -47,10 +44,8 @@ if __name__ == "__main__":
             stats['DISK'] = measures.disk.get(guest)
             stats['DISK_GUEST'] = measures.disk_guest.get(guest)
             stats['NETWORK'] = measures.network.get(guest)
-            stats['LLC'] = measures.llc.get(guest)
-            stats['IPC'] = measures.ipc.get(guest)
-            
+            stats['CPU_MEM'] = guest.perf.get()
+
             putMeasurements(guest_name, now, stats, '')
 
         time.sleep(1)
-        oprofile.flush()

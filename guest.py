@@ -1,13 +1,13 @@
 from lxml import etree
 import arp
-import oprofile_wrapper
+import perf_wrapper
 
 class Guest:
     def __init__(self, domain, pid):
         self.domain = domain
         self.pid = pid
         self.desc = None
-        self.op_data = oprofile_wrapper.OP_Data()
+        self.perf = perf_wrapper.Perf(pid)
 
     def get_domain(self):
         return self.domain
