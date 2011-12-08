@@ -11,7 +11,7 @@ class Perf:
 
     def __init__(self, pid):
         self.pid = pid
-        self.args = shlex.split("sudo perf stat -e LLC-loads -e LLC-load-misses -e LLC-stores -e LLC-store-misses -e LLC-prefetch-misses -e instructions -e cpu-cycles -a -p " + str(pid))
+        self.args = shlex.split("sudo perf stat -e LLC-loads -e LLC-load-misses -e LLC-stores -e LLC-store-misses -e LLC-prefetch-misses -e instructions -e cpu-cycles -p " + str(pid))
         self.pipe = None
 
     def __del__(self):
