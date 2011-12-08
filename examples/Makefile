@@ -1,2 +1,2 @@
-memory: memory.cpp
-	g++ memory.cpp -o memory
+all: resource.c
+	gcc resource.c -o resource -std=gnu99
