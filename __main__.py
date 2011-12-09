@@ -28,7 +28,7 @@ def putMeasurements(guest, now, stats, prefix):
 
     
 if __name__ == "__main__":
-    with daemon.DaemonContext():
+#    with daemon.DaemonContext():
         conn = libvirt_wrapper.Connection()
         guests = conn.get_guests()
 

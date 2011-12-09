@@ -1,5 +1,5 @@
 $(function() {
-      var THREAT_LLC_LOADS = 100000;
+      var THREAT_LLC_LOADS = 10000000;
 
       window.ImageView = Backbone.View.extend(
           {
@@ -74,9 +74,9 @@ $(function() {
 
               },
 
-              unsetRed: function()
+              unsetRed: function(guest)
               {
-                  this.el.find('input').removeClass('red');
+                  this.el.find('span[id="span_' + guest + '"]').removeClass('red');
               }
           });
 
@@ -134,6 +134,7 @@ $(function() {
             });
 
       var count = 0;
+	  var old_threat_guest;
       var refresh = function()
       {
           var guests = guestView.getValues();
@@ -145,12 +146,13 @@ $(function() {
                 {
                     if (threat.value > THREAT_LLC_LOADS)
                     {
-                        guestView.unsetRed();
-                        guestView.setRed(threat.max_guest);
+                        guestView.unsetRed( old_threat_guest );
+						old_threat_guest = threat.max_guest;
+                        guestView.setRed( threat.max_guest );
                     }
                     else
                     {
-                        guestView.unsetRed();
+                        guestView.unsetRed( old_threat_guest );
                     }
                 });
       };
