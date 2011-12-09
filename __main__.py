@@ -1,5 +1,6 @@
 import time
 import datetime
+import daemon
 
 import libvirt_wrapper
 import perf_wrapper
@@ -27,21 +28,23 @@ def putMeasurements(guest, now, stats, prefix):
 
     
 if __name__ == "__main__":
-    conn = libvirt_wrapper.Connection()
-    guests = conn.get_guests()
+    with daemon.DaemonContext():
+        conn = libvirt_wrapper.Connection()
+        guests = conn.get_guests()
 
-    while True:
+        while True:
 
-        for guest in guests:
-            guest_name = guest.get_name()
-            now = datetime.datetime.now()
+            for guest in guests:
+                guest_name = guest.get_name()
+                now = datetime.datetime.now()
 
-            stats = {}
-            stats['DISK'] = measures.disk.get(guest)
-            stats['DISK_GUEST'] = measures.disk_guest.get(guest)
-            stats['NETWORK'] = measures.network.get(guest)
-            stats['CPU_MEM'] = guest.perf.get()
+                stats = {}
+                stats['DISK'] = measures.disk.get(guest)
+                stats['DISK_GUEST'] = measures.disk_guest.get(guest)
+                stats['NETWORK'] = measures.network.get(guest)
+                stats['CPU_MEM'] = guest.perf.get()
 
-            putMeasurements(guest_name, now, stats, '')
+                putMeasurements(guest_name, now, stats, '')
 
-        time.sleep(1)
+            time.sleep(1)
+
