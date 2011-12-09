@@ -9,6 +9,8 @@ import datetime
 
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.db.models import F
+from django.db.models.aggregates import Max
 
 from graph.models import Measurement
 
@@ -62,9 +64,10 @@ def image(request):
 
 def measures(request):
     result = set()
-    measurements = Measurement.objects.all()
+    measurements = Measurement.objects.values('measure').distinct()
     for measurement in measurements:
-        result.add(measurement.measure)
+        print measurement
+        result.add(measurement['measure'])
     return HttpResponse(json.dumps(list(result)), mimetype='application/json')
 
 
@@ -75,3 +78,18 @@ def guests(request):
     for guest in guests:
         result.add(guest.get_name())
     return HttpResponse(json.dumps(list(result)), mimetype='application/json')
+
+
+def threat_llc_loads(request):
+    measure = 'CPU_MEM/LLC-loads'
+    max_time = Measurement.objects.aggregate(Max('time'))['time__max']
+    measurements = Measurement.objects.filter(measure='CPU_MEM/LLC-loads', time=max_time)
+    total_value = 0
+    max_value = 0
+    guest = None
+    for measurement in measurements:
+        total_value += measurement.value
+        if max_value < measurement.value:
+            max_value = measurement.value
+            guest = measurement.guest
+    return HttpResponse(json.dumps({'value': total_value, 'max_guest': guest}), mimetype='application/json')

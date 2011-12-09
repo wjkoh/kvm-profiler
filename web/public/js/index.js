@@ -1,4 +1,6 @@
 $(function() {
+      var THREAT_LLC_LOADS = 100000;
+
       window.ImageView = Backbone.View.extend(
           {
               tagName: 'div',
@@ -29,7 +31,7 @@ $(function() {
           {
               tagName: 'fieldset',
 
-              template: _.template('<input type="checkbox" name="guest" value="<%= name %>" /><%= name %><br />'),
+              template: _.template('<input type="checkbox" name="guest" value="<%= name %>" /><span id="span_<%= name %>"><%= name %></span><br />'),
 
               initialize: function() {
                   this.el = $(this.el);
@@ -64,6 +66,17 @@ $(function() {
                           result.push($(this).val());
                       });
                   return result;
+              },
+
+              setRed: function(guest)
+              {
+                  this.el.find('span[id="span_' + guest + '"]').addClass('red');
+
+              },
+
+              unsetRed: function()
+              {
+                  this.el.find('input').removeClass('red');
               }
           });
 
@@ -127,6 +140,19 @@ $(function() {
           var measure = measureView.getValue();
           measure = measure ? measure : '';
           imageView.setSrc('/graph/graph.png?count=' + (++count) + '&duration=100&guests=' + guests + '&measure=' + measure);
+
+          $.get('/graph/threat_llc_loads', function(threat)
+                {
+                    if (threat.value > THREAT_LLC_LOADS)
+                    {
+                        guestView.unsetRed();
+                        guestView.setRed(threat.max_guest);
+                    }
+                    else
+                    {
+                        guestView.unsetRed();
+                    }
+                });
       };
 
       setInterval(refresh, 1000);
