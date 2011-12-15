@@ -15,6 +15,9 @@ You need to ensure that your username is added to the groups: kvm and libvirtd.
     $ sudo adduser `id -un` libvirtd
     Adding user '<username>' to group 'libvirtd' ...
 
+# Demo Videos
+<iframe width="1280" height="720" src="http://www.youtube.com/embed/videoseries?list=PL74358EE18BC4C358&amp;hl=en_US&amp;hd=1" frameborder="0" allowfullscreen></iframe>
+
 # Dependencies
 1. [python-libvirt](http://packages.ubuntu.com/search?keywords=python-libvirt)
 1. [lxml](http://pypi.python.org/pypi/lxml)
@@ -30,4 +33,3 @@ You need to ensure that your username is added to the groups: kvm and libvirtd.
 * Charles Hyun <tokki7@gmail.com>
 * Jeehoon Kang <windmorning@gmail.com>
 * Woojong Koh  <wjngkoh@gmail.com>
-
