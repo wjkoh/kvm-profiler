@@ -16,11 +16,11 @@ You need to ensure that your username is added to the groups: kvm and libvirtd.
     Adding user '<username>' to group 'libvirtd' ...
 
 # Demo Videos
-* [KVM Profiler Demo Video](http://www.youtube.com/watch?v=P1cmw0tE0BU)
-* [Case 1: High-High](http://www.youtube.com/watch?v=rByf6voRBSw)
-* [Case 1: Low-Idle](http://www.youtube.com/watch?v=nw1chsnDC1g)
-* [Case 2: High-Idle](http://www.youtube.com/watch?v=FwvZAngpanI)
-* [Case 2: High-Low](http://www.youtube.com/watch?v=1r4XB7tTIeM)
+* [KVM Profiler Demo Video](http://www.youtube.com/watch?v=P1cmw0tE0BU&hd=1)
+* [Case 1: High-High](http://www.youtube.com/watch?v=rByf6voRBSw&hd=1)
+* [Case 1: Low-Idle](http://www.youtube.com/watch?v=nw1chsnDC1g&hd=1)
+* [Case 2: High-Idle](http://www.youtube.com/watch?v=FwvZAngpanI&hd=1)
+* [Case 2: High-Low](http://www.youtube.com/watch?v=1r4XB7tTIeM&hd=1)
 
 # Dependencies
 1. [python-libvirt](http://packages.ubuntu.com/search?keywords=python-libvirt)
